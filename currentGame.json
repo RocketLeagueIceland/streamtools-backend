@@ -1,0 +1,19 @@
+{
+  "bestOf": 7,
+  "gameNr": 5,
+  "overlayShowing": true,
+  "boostOverlayShowing": true,
+  "targetOverlayShowing": true,
+  "hasCustomTimeAndScore": true,
+  "playerShowing": true,
+  "teams": [
+    {
+      "id": 22,
+      "gamesWon": 3
+    },
+    {
+      "id": 68,
+      "gamesWon": 1
+    }
+  ]
+}
