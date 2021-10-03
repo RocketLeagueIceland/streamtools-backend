@@ -25,6 +25,7 @@ const upload = multer({ storage: storage });
 
 const timerData = 'timer.json'
 const currentGameData = 'currentGame.json';
+const currentStandingData = 'currentStanding.json';
 const nextGameData = 'nextGame.json';
 const allTeamsData = 'teams.json';
 const scoreboardData = 'scoreboard.json';
@@ -337,6 +338,36 @@ app.post('/reset-scoreboard', (req, res) => {
     if (err) throw err;
   });
 
+  return res.sendStatus(200);
+});
+
+app.get('/current-standing', (req, res) => {
+  let rawdata = fs.readFileSync(currentStandingData);
+  let currentStandings = JSON.parse(rawdata).currentStanding;
+  rawdata = fs.readFileSync(allTeamsData);
+  let allTeams = JSON.parse(rawdata).teams;
+
+  for(i = 0; i < currentStandings.length; i++){
+    let team = allTeams.find(x => x.id === currentStandings[i].id)
+    currentStandings[i].name = team.name
+    currentStandings[i].logo = team.logo
+  }
+
+  if (!currentStandings || currentStandings.length != 8) return res.sendStatus(500);
+  return res.json(currentStandings);
+});
+
+app.put('/current-standing', (req, res) => {
+  console.log(req.body)
+  let currentstandings = req.body;
+  if (!currentstandings ) return res.sendStatus(401);
+  fs.writeFile(currentStandingData, JSON.stringify(currentstandings), (err) => {
+    // throws an error, you could also catch it here
+    if (err) throw err;
+
+    // success case, the file was saved
+    console.log('current standings updated');
+  });
   return res.sendStatus(200);
 });
 

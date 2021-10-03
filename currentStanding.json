@@ -1,0 +1,12 @@
+{
+  "currentStanding": [
+    {"id": 46, "played": 5, "won": 5, "lost": 0, "gameswon": 15, "gameslost": 0, "points": 10},
+    {"id": 16, "played": 4, "won": 3, "lost": 1, "gameswon": 9, "gameslost": 3, "points": 6},
+    {"id": 75, "played": 4, "won": 3, "lost": 1, "gameswon": 9, "gameslost": 7, "points": 6},
+    {"id": 1,  "played": 5, "won": 3, "lost": 2, "gameswon": 10, "gameslost": 7, "points": 6},
+    {"id": 21, "played": 4, "won": 2, "lost": 2, "gameswon": 8, "gameslost": 6, "points": 4},
+    {"id": 11, "played": 5, "won": 2, "lost": 3, "gameswon": 6, "gameslost": 11, "points": 4},
+    {"id": 20, "played": 4, "won": 0, "lost": 4, "gameswon": 1, "gameslost": 12, "points": 0},
+    {"id": 10, "played": 5, "won": 0, "lost": 5, "gameswon": 3, "gameslost": 15, "points": 0}
+  ]
+}
