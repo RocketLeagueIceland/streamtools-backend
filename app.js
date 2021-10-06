@@ -422,6 +422,54 @@ app.get('/toornament-current-standing', async (req, res) => {
   }
 });
 
+app.get('/toornament-current-standing-first', async (req, res) => {
+  try {
+
+    rawdata = fs.readFileSync(allTeamsData);
+    let allTeams = JSON.parse(rawdata).teams;
+
+    //scrape toornament site for info.
+    const { data } = await axios.get('https://play.toornament.com/en_GB/tournaments/4866403712109051904/stages/4905062485454495744/groups/4954169936141074432/');
+    // Load HTML we fetched in the previous line
+    const $ = cheerio.load(data);
+  
+    const overallStandings = $('.ranking-item');
+    // console.log(overallStandings)
+
+    let toornamentStandingsArray = []
+
+    overallStandings.each( (i, el) => { 
+      // console.log($(el).children)
+      let rank = parseInt($(el).children('div:nth-child(1)').text().trim(), 10)
+      let logo = $(el).children('div:nth-child(2)').text().trim()
+      let name = $(el).children('div:nth-child(3)').text().trim()
+      let played = parseInt($(el).children('div:nth-child(4)').text().trim(), 10)
+      let won = parseInt($(el).children('div:nth-child(5)').text().trim(), 10)
+      let draw = parseInt($(el).children('div:nth-child(6)').text().trim(), 10)
+      let lost = parseInt($(el).children('div:nth-child(7)').text().trim(), 10)
+      let forfeit = parseInt($(el).children('div:nth-child(8)').text().trim(), 10)
+      let gameswon = parseInt($(el).children('div:nth-child(9)').text().trim(), 10)
+      let gameslost = parseInt($(el).children('div:nth-child(10)').text().trim(), 10)
+      let plusminus = parseInt($(el).children('div:nth-child(11)').text().trim(), 10)
+      let points = parseInt($(el).children('div:nth-child(12)').text().trim(), 10)
+      toornamentStandingsArray.push({name, played, won, lost, gameswon, gameslost, points})
+    } );
+    //connect info with correct teams in current standings
+    for(i = 0; i < toornamentStandingsArray.length; i++){
+      console.log(toornamentStandingsArray[i])
+      let team = allTeams.find(x => x.name === toornamentStandingsArray[i].name)
+      console.log(team)
+      toornamentStandingsArray[i].id = team ? team.id : null
+      toornamentStandingsArray[i].logo = team ? team.logo : ''
+    }
+
+    //return info as json in nice format.
+    return res.json(toornamentStandingsArray);
+  } catch (error) {
+    console.log(error)
+  }
+});
+
 
 // Start the Express server
 app.listen(3002, () => console.log('Server running on port 3002!'))
