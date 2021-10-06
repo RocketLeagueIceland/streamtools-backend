@@ -47,7 +47,7 @@
     },
     {
       "id": 10,
-      "name": "Panda Bois",
+      "name": "Pandabois",
       "logo": "Pandabois_logo_resized.png"
     },
     {
@@ -92,12 +92,12 @@
     },
     {
       "id": 20,
-      "name": "oCtai Esports",
+      "name": "oCtai esports",
       "logo": "oCtai_esports.png"
     },
     {
       "id": 21,
-      "name": "Þór",
+      "name": "ÞÓR Akureyri",
       "logo": "thor-akureyri-vector-logo.png"
     },
     {
@@ -117,7 +117,7 @@
     },
     {
       "id": 46,
-      "name": "Lava",
+      "name": "LAVA esports",
       "logo": "Lava_logo_transparent.png"
     },
     {
@@ -152,7 +152,7 @@
     },
     {
       "id": 75,
-      "name": "Rafík",
+      "name": "RAFÍK",
       "logo": "RAFIK_logo_resized.png"
     }
   ]

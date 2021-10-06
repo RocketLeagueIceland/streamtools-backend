@@ -1,12 +1,1 @@
-{
-  "currentStanding": [
-    {"id": 46, "played": 5, "won": 5, "lost": 0, "gameswon": 15, "gameslost": 0, "points": 10},
-    {"id": 16, "played": 4, "won": 3, "lost": 1, "gameswon": 9, "gameslost": 3, "points": 6},
-    {"id": 75, "played": 4, "won": 3, "lost": 1, "gameswon": 9, "gameslost": 7, "points": 6},
-    {"id": 1,  "played": 5, "won": 3, "lost": 2, "gameswon": 10, "gameslost": 7, "points": 6},
-    {"id": 21, "played": 4, "won": 2, "lost": 2, "gameswon": 8, "gameslost": 6, "points": 4},
-    {"id": 11, "played": 5, "won": 2, "lost": 3, "gameswon": 6, "gameslost": 11, "points": 4},
-    {"id": 20, "played": 4, "won": 0, "lost": 4, "gameswon": 1, "gameslost": 12, "points": 0},
-    {"id": 10, "played": 5, "won": 0, "lost": 5, "gameswon": 3, "gameslost": 15, "points": 0}
-  ]
-}
+{"currentStanding":[{"played":6,"won":6,"lost":0,"gameswon":18,"gameslost":0,"points":12,"id":46},{"name":"RAFÍK","played":6,"won":5,"lost":1,"gameswon":15,"gameslost":7,"points":10,"id":75,"logo":"RAFIK_logo_resized.png"},{"name":"ÞÓR Akureyri","played":6,"won":4,"lost":2,"gameswon":14,"gameslost":6,"points":8,"id":21,"logo":"thor-akureyri-vector-logo.png"},{"name":"Midnight Bulls","played":6,"won":3,"lost":3,"gameswon":9,"gameslost":9,"points":6,"id":16,"logo":"MB_resized.png"},{"name":"KR","played":6,"won":3,"lost":3,"gameswon":10,"gameslost":10,"points":6,"id":1,"logo":"KR png.png"},{"name":"Somnio","played":6,"won":2,"lost":4,"gameswon":6,"gameslost":14,"points":4,"id":11,"logo":"Somnio_logo_new_resized.png"},{"name":"Pandabois","played":6,"won":1,"lost":5,"gameswon":6,"gameslost":16,"points":2,"id":10,"logo":"Pandabois_logo_resized.png"},{"name":"oCtai esports","played":6,"won":0,"lost":6,"gameswon":2,"gameslost":18,"points":0,"id":20,"logo":"oCtai_esports.png"}]}
