@@ -6,44 +6,9 @@
       "logo": "KR png.png"
     },
     {
-      "id": 2,
-      "name": "Fylkir",
-      "logo": "Fylkir.png"
-    },
-    {
-      "id": 3,
-      "name": "KR Black",
-      "logo": "kr black.png"
-    },
-    {
-      "id": 4,
-      "name": "GOAT",
-      "logo": "Goat.png"
-    },
-    {
       "id": 5,
       "name": "Dusty",
       "logo": "Dusty.png"
-    },
-    {
-      "id": 6,
-      "name": "Warriors of Valhalla",
-      "logo": "WarriorsOfValhalla-logo.png"
-    },
-    {
-      "id": 7,
-      "name": "Force",
-      "logo": "Force.png"
-    },
-    {
-      "id": 8,
-      "name": "Force 2",
-      "logo": "Jolofoce-circle.png"
-    },
-    {
-      "id": 9,
-      "name": "FV Esports",
-      "logo": "FV_logo.png"
     },
     {
       "id": 10,
@@ -56,29 +21,14 @@
       "logo": "Somnio_logo_new_resized.png"
     },
     {
-      "id": 12,
-      "name": "Blue Steel",
-      "logo": "BlueSteel.png"
-    },
-    {
       "id": 13,
-      "name": "High Voltage Banger",
+      "name": "High-Voltage Bangers",
       "logo": "HighVoltageBangers.png"
-    },
-    {
-      "id": 14,
-      "name": "Vaddimah",
-      "logo": "KR png.png"
     },
     {
       "id": 16,
       "name": "Midnight Bulls",
       "logo": "MB_resized.png"
-    },
-    {
-      "id": 17,
-      "name": "Vættir",
-      "logo": "vaettir.png"
     },
     {
       "id": 18,
@@ -87,7 +37,7 @@
     },
     {
       "id": 19,
-      "name": "R.O.N.",
+      "name": "RON",
       "logo": "44b9f8e9-15cf-4b5c-a055-08d8c46e1444_128_128.jpg"
     },
     {
@@ -104,11 +54,6 @@
       "id": 22,
       "name": "Keflavík",
       "logo": "375keflrgb.png"
-    },
-    {
-      "id": 28,
-      "name": "FH",
-      "logo": "FH.png"
     },
     {
       "id": 30,
@@ -136,11 +81,6 @@
       "logo": "Infinty_esport_emoji.png"
     },
     {
-      "id": 71,
-      "name": "Deez Nutz",
-      "logo": "deezNutz-removebg-preview.png"
-    },
-    {
       "id": 72,
       "name": "blulaGOONS",
       "logo": "RLIS-Toornament-logo.png"
@@ -154,6 +94,26 @@
       "id": 75,
       "name": "RAFÍK",
       "logo": "RAFIK_logo_resized.png"
-    }
+    },
+    {
+      "id": 76,
+      "name": "WannaBees",
+      "logo": "wannabee.png"
+    },
+    {
+      "id": 77,
+      "name": "Rusty",
+      "logo": "Rusty.png"
+    },
+    {
+      "id": 78,
+      "name": "Þór White",
+      "logo": "thor-akureyri-vector-logo.png"
+    },
+    {
+      "id": 79,
+      "name": "Fork",
+      "logo": "fork.png"
+    } 
   ]
 }

@@ -1,7 +1,7 @@
 const express = require('express')
 const fs = require('fs');
 const cors = require('cors');
-const multer  = require('multer');
+const multer = require('multer');
 const axios = require("axios");
 const cheerio = require("cheerio");
 const pretty = require("pretty");
@@ -32,6 +32,8 @@ const currentStandingData = 'currentStanding.json';
 const nextGameData = 'nextGame.json';
 const allTeamsData = 'teams.json';
 const scoreboardData = 'scoreboard.json';
+const weekNumberData = 'weekNumber.json';
+const gamesOnStreamData = 'gamesOnStream.json';
 
 // Initialize the countdown
 setInterval(() => {
@@ -303,12 +305,12 @@ app.post('/create-team', upload.single('file'), (req, res) => {
   let rawdata = fs.readFileSync(allTeamsData);
   let allTeams = JSON.parse(rawdata);
   console.log(allTeams)
-  let newId = allTeams.teams[allTeams.teams.length-1].id + 1
+  let newId = allTeams.teams[allTeams.teams.length - 1].id + 1
   let fileName = req.file.originalname
   let teamName = req.body.teamName
   let team = {
-    id: newId, 
-    name: teamName, 
+    id: newId,
+    name: teamName,
     logo: fileName
   };
   allTeams.teams.push(team)
@@ -344,13 +346,34 @@ app.post('/reset-scoreboard', (req, res) => {
   return res.sendStatus(200);
 });
 
+app.get('/current-week-number', (req, res) => {
+  let rawdata = fs.readFileSync(weekNumberData);
+  let weekNumber = JSON.parse(rawdata);
+
+  return res.json(weekNumber);
+});
+
+app.put('/current-week-number', (req, res) => {
+  console.log(req.body)
+  let weekNumber = req.body;
+  if (!weekNumber) return res.sendStatus(401);
+  fs.writeFile(weekNumberData, JSON.stringify(weekNumber), (err) => {
+    // throws an error, you could also catch it here
+    if (err) throw err;
+
+    // success case, the file was saved
+    console.log('current week number updated');
+  });
+  return res.sendStatus(200);
+});
+
 app.get('/current-standing', (req, res) => {
   let rawdata = fs.readFileSync(currentStandingData);
   let currentStandings = JSON.parse(rawdata).currentStanding;
   rawdata = fs.readFileSync(allTeamsData);
   let allTeams = JSON.parse(rawdata).teams;
 
-  for(i = 0; i < currentStandings.length; i++){
+  for (i = 0; i < currentStandings.length; i++) {
     let team = allTeams.find(x => x.id === currentStandings[i].id)
     currentStandings[i].name = team.name
     currentStandings[i].logo = team.logo
@@ -363,7 +386,7 @@ app.get('/current-standing', (req, res) => {
 app.put('/current-standing', (req, res) => {
   console.log(req.body)
   let currentstandings = req.body;
-  if (!currentstandings ) return res.sendStatus(401);
+  if (!currentstandings) return res.sendStatus(401);
   fs.writeFile(currentStandingData, JSON.stringify(currentstandings), (err) => {
     // throws an error, you could also catch it here
     if (err) throw err;
@@ -384,13 +407,13 @@ app.get('/toornament-current-standing', async (req, res) => {
     const { data } = await axios.get('https://play.toornament.com/en_GB/tournaments/4866403712109051904/stages/4886808537895821312/groups/4886808538936008721/');
     // Load HTML we fetched in the previous line
     const $ = cheerio.load(data);
-  
+
     const overallStandings = $('.ranking-item');
     // console.log(overallStandings)
 
     let toornamentStandingsArray = []
 
-    overallStandings.each( (i, el) => { 
+    overallStandings.each((i, el) => {
       // console.log($(el).children)
       let rank = parseInt($(el).children('div:nth-child(1)').text().trim(), 10)
       let logo = $(el).children('div:nth-child(2)').text().trim()
@@ -404,13 +427,11 @@ app.get('/toornament-current-standing', async (req, res) => {
       let gameslost = parseInt($(el).children('div:nth-child(10)').text().trim(), 10)
       let plusminus = parseInt($(el).children('div:nth-child(11)').text().trim(), 10)
       let points = parseInt($(el).children('div:nth-child(12)').text().trim(), 10)
-      toornamentStandingsArray.push({name, played, won, lost, gameswon, gameslost, points})
-    } );
+      toornamentStandingsArray.push({ name, played, won, lost, gameswon, gameslost, points })
+    });
     //connect info with correct teams in current standings
-    for(i = 0; i < toornamentStandingsArray.length; i++){
-      console.log(toornamentStandingsArray[i])
+    for (i = 0; i < toornamentStandingsArray.length; i++) {
       let team = allTeams.find(x => x.name === toornamentStandingsArray[i].name)
-      console.log(team)
       toornamentStandingsArray[i].id = team.id
       toornamentStandingsArray[i].logo = team.logo
     }
@@ -432,13 +453,13 @@ app.get('/toornament-current-standing-first', async (req, res) => {
     const { data } = await axios.get('https://play.toornament.com/en_GB/tournaments/4866403712109051904/stages/4905062485454495744/groups/4954169936141074432/');
     // Load HTML we fetched in the previous line
     const $ = cheerio.load(data);
-  
+
     const overallStandings = $('.ranking-item');
     // console.log(overallStandings)
 
     let toornamentStandingsArray = []
 
-    overallStandings.each( (i, el) => { 
+    overallStandings.each((i, el) => {
       // console.log($(el).children)
       let rank = parseInt($(el).children('div:nth-child(1)').text().trim(), 10)
       let logo = $(el).children('div:nth-child(2)').text().trim()
@@ -452,13 +473,11 @@ app.get('/toornament-current-standing-first', async (req, res) => {
       let gameslost = parseInt($(el).children('div:nth-child(10)').text().trim(), 10)
       let plusminus = parseInt($(el).children('div:nth-child(11)').text().trim(), 10)
       let points = parseInt($(el).children('div:nth-child(12)').text().trim(), 10)
-      toornamentStandingsArray.push({name, played, won, lost, gameswon, gameslost, points})
-    } );
+      toornamentStandingsArray.push({ name, played, won, lost, gameswon, gameslost, points })
+    });
     //connect info with correct teams in current standings
-    for(i = 0; i < toornamentStandingsArray.length; i++){
-      console.log(toornamentStandingsArray[i])
+    for (i = 0; i < toornamentStandingsArray.length; i++) {
       let team = allTeams.find(x => x.name === toornamentStandingsArray[i].name)
-      console.log(team)
       toornamentStandingsArray[i].id = team ? team.id : null
       toornamentStandingsArray[i].logo = team ? team.logo : ''
     }
@@ -468,6 +487,40 @@ app.get('/toornament-current-standing-first', async (req, res) => {
   } catch (error) {
     console.log(error)
   }
+});
+
+app.get('/games-on-stream', (req, res) => {
+  let rawdata = fs.readFileSync(gamesOnStreamData);
+  let gamesOnStream = JSON.parse(rawdata);
+  rawdata = fs.readFileSync(allTeamsData);
+  let allTeams = JSON.parse(rawdata).teams;
+
+  for (i = 0; i < gamesOnStream.evening.length; i++) {
+    let team = allTeams.find(x => x.id === gamesOnStream.evening[i].blueteamId)
+    gamesOnStream.evening[i].blueteamName = team.name
+    gamesOnStream.evening[i].blueteamLogo = team.logo
+
+    team = allTeams.find(x => x.id === gamesOnStream.evening[i].orangeteamId)
+    gamesOnStream.evening[i].orangeteamName = team.name
+    gamesOnStream.evening[i].orangeteamLogo = team.logo
+  }
+
+  if (!gamesOnStream) return res.sendStatus(500);
+  return res.json(gamesOnStream);
+});
+
+app.put('/games-on-stream', (req, res) => {
+  console.log(req.body)
+  let gamesOnStream = req.body;
+  if (!gamesOnStream) return res.sendStatus(401);
+  fs.writeFile(gamesOnStreamData, JSON.stringify(gamesOnStream), (err) => {
+    // throws an error, you could also catch it here
+    if (err) throw err;
+
+    // success case, the file was saved
+    console.log('Games on stream updated');
+  });
+  return res.sendStatus(200);
 });
 
 
