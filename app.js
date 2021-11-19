@@ -34,6 +34,7 @@ const allTeamsData = 'teams.json';
 const scoreboardData = 'scoreboard.json';
 const weekNumberData = 'weekNumber.json';
 const gamesOnStreamData = 'gamesOnStream.json';
+const playoffsData = 'playoffs.json';
 
 // Initialize the countdown
 setInterval(() => {
@@ -519,6 +520,96 @@ app.put('/games-on-stream', (req, res) => {
 
     // success case, the file was saved
     console.log('Games on stream updated');
+  });
+  return res.sendStatus(200);
+});
+
+app.get('/playoffs', (req, res) => {
+  let rawdata = fs.readFileSync(playoffsData);
+  let playoffs = JSON.parse(rawdata);
+  rawdata = fs.readFileSync(allTeamsData);
+  let allTeams = JSON.parse(rawdata).teams;
+
+  if(playoffs.m11Team1Id){
+    let m11Team1 = playoffs.m11Team1Id ? allTeams.find(x => x.id === playoffs.m11Team1Id) : null;
+    playoffs.m11Team1name = m11Team1.name
+    playoffs.m11Team1logo = m11Team1.logo
+  }
+  if(playoffs.m11Team2Id){
+    let m11Team2 = playoffs.m11Team2Id ? allTeams.find(x => x.id === playoffs.m11Team2Id) : null;
+    playoffs.m11Team2name = m11Team2.name
+    playoffs.m11Team2logo = m11Team2.logo
+  }
+  
+  if(playoffs.m12Team1Id){
+    let m12Team1 = playoffs.m12Team1Id ? allTeams.find(x => x.id === playoffs.m12Team1Id) : null;
+    playoffs.m12Team1name = m12Team1.name
+    playoffs.m12Team1logo = m12Team1.logo
+  }
+  if(playoffs.m12Team2Id){
+    let m12Team2 = playoffs.m12Team2Id ? allTeams.find(x => x.id === playoffs.m12Team2Id) : null;
+    playoffs.m12Team2name = m12Team2.name
+    playoffs.m12Team2logo = m12Team2.logo
+  }
+  
+  if(playoffs.semi1Team1Id){
+    let semi1Team1 = playoffs.semi1Team1Id ? allTeams.find(x => x.id === playoffs.semi1Team1Id) : null;
+    playoffs.semi1Team1name = semi1Team1.name
+    playoffs.semi1Team1logo = semi1Team1.logo
+  }
+  if(playoffs.semi1Team2Id){
+    let semi1Team2 = playoffs.semi1Team2Id ? allTeams.find(x => x.id === playoffs.semi1Team2Id) : null;
+    playoffs.semi1Team2name = semi1Team2.name
+    playoffs.semi1Team2logo = semi1Team2.logo
+  }
+  
+  if(playoffs.semi2Team1Id){
+    let semi2Team1 = playoffs.semi2Team1Id ? allTeams.find(x => x.id === playoffs.semi2Team1Id) : null;
+    playoffs.semi2Team1name = semi2Team1.name
+    playoffs.semi2Team1logo = semi2Team1.logo
+  }
+  if(playoffs.semi2Team2Id){
+    let semi2Team2 = playoffs.semi2Team2Id ? allTeams.find(x => x.id === playoffs.semi2Team2Id) : null;
+    playoffs.semi2Team2name = semi2Team2.name
+    playoffs.semi2Team2logo = semi2Team2.logo
+  }
+  
+  if(playoffs.thirdTeam1Id){
+    let thirdTeam1 = playoffs.thirdTeam1Id ? allTeams.find(x => x.id === playoffs.thirdTeam1Id) : null;
+    playoffs.thirdTeam1name = thirdTeam1.name
+    playoffs.thirdTeam1logo = thirdTeam1.logo
+  }
+  if(playoffs.thirdTeam2Id){
+    let thirdTeam2 = playoffs.thirdTeam2Id ? allTeams.find(x => x.id === playoffs.thirdTeam2Id) : null;
+    playoffs.thirdTeam2name = thirdTeam2.name
+    playoffs.thirdTeam2logo = thirdTeam2.logo
+  }
+  
+  if(playoffs.finalTeam1Id){
+    let finalTeam1 = playoffs.finalTeam1Id ? allTeams.find(x => x.id === playoffs.finalTeam1Id) : null;
+    playoffs.finalTeam1name = finalTeam1.name
+    playoffs.finalTeam1logo = finalTeam1.logo
+  }
+  if(playoffs.finalTeam2Id){
+    let finalTeam2 = playoffs.finalTeam2Id ? allTeams.find(x => x.id === playoffs.finalTeam2Id) : null;
+    playoffs.finalTeam2name = finalTeam2.name
+    playoffs.finalTeam2logo = finalTeam2.logo
+  }
+
+  if (!playoffs) return res.sendStatus(500);
+  return res.json(playoffs);
+});
+
+
+app.put('/playoffs', (req, res) => {
+  console.log(req.body)
+  let playoffs = req.body;
+  fs.writeFile(playoffsData, JSON.stringify(playoffs), (err) => {
+    // throws an error, you could also catch it here
+    if (err) throw err;
+
+    // success case, the file was saved
+    console.log('current game updated');
   });
   return res.sendStatus(200);
 });
