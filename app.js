@@ -35,6 +35,8 @@ const scoreboardData = 'scoreboard.json';
 const weekNumberData = 'weekNumber.json';
 const gamesOnStreamData = 'gamesOnStream.json';
 const playoffsData = 'playoffs.json';
+const tvBeforeGameData = 'tvBeforeGame.json';
+const tvAfterGameData = 'tvAfterGame.json';
 
 // Initialize the countdown
 setInterval(() => {
@@ -405,7 +407,7 @@ app.get('/toornament-current-standing', async (req, res) => {
     let allTeams = JSON.parse(rawdata).teams;
 
     //scrape toornament site for info.
-    const { data } = await axios.get('https://play.toornament.com/en_GB/tournaments/4866403712109051904/stages/4886808537895821312/groups/4886808538936008721/');
+    const { data } = await axios.get('https://play.toornament.com/en_GB/tournaments/5396958141712015360/stages/5396992519904862208/groups/5396992520609505297/');
     // Load HTML we fetched in the previous line
     const $ = cheerio.load(data);
 
@@ -428,11 +430,16 @@ app.get('/toornament-current-standing', async (req, res) => {
       let gameslost = parseInt($(el).children('div:nth-child(10)').text().trim(), 10)
       let plusminus = parseInt($(el).children('div:nth-child(11)').text().trim(), 10)
       let points = parseInt($(el).children('div:nth-child(12)').text().trim(), 10)
-      toornamentStandingsArray.push({ name, played, won, lost, gameswon, gameslost, points })
+      if(!points){
+        points = 0;
+      }
+      toornamentStandingsArray.push({ name, played, won, lost, gameswon, gameslost, plusminus, points })
     });
     //connect info with correct teams in current standings
     for (i = 0; i < toornamentStandingsArray.length; i++) {
       let team = allTeams.find(x => x.name === toornamentStandingsArray[i].name)
+      console.log(toornamentStandingsArray[i])
+      console.log(team)
       toornamentStandingsArray[i].id = team.id
       toornamentStandingsArray[i].logo = team.logo
     }
@@ -605,6 +612,38 @@ app.put('/playoffs', (req, res) => {
   console.log(req.body)
   let playoffs = req.body;
   fs.writeFile(playoffsData, JSON.stringify(playoffs), (err) => {
+    // throws an error, you could also catch it here
+    if (err) throw err;
+
+    // success case, the file was saved
+    console.log('current game updated');
+  });
+  return res.sendStatus(200);
+});
+
+app.get('/tv-before-game', (req, res) => {
+  let rawdata = fs.readFileSync(currentGameData);
+  let currentGame = JSON.parse(rawdata);
+  rawdata = fs.readFileSync(allTeamsData);
+  let allTeams = JSON.parse(rawdata).teams;
+  let team1 = allTeams.find(x => x.id === currentGame.teams[0].id);
+  let team2 = allTeams.find(x => x.id === currentGame.teams[1].id);
+  currentGame.teams[0].name = team1.name
+  currentGame.teams[0].logo = team1.logo
+  currentGame.teams[1].name = team2.name
+  currentGame.teams[1].logo = team2.logo
+  if (!currentGame || !currentGame.teams) return res.sendStatus(500);
+  return res.json(currentGame);
+});
+
+
+app.put('/tv-before-game', (req, res) => {
+  console.log(req.body)
+  let currentGame = req.body;
+  if (!currentGame || !currentGame.bestOf || currentGame.bestOf <= 0) return res.sendStatus(501);
+  if (!currentGame || !currentGame.gameNr || currentGame.gameNr <= 0) return res.sendStatus(502);
+  if (!currentGame || !currentGame.teams || currentGame.teams.length <= 1) return res.sendStatus(503);
+  fs.writeFile(currentGameData, JSON.stringify(currentGame), (err) => {
     // throws an error, you could also catch it here
     if (err) throw err;
 

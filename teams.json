@@ -6,11 +6,6 @@
       "logo": "KR png.png"
     },
     {
-      "id": 5,
-      "name": "Dusty",
-      "logo": "Dusty.png"
-    },
-    {
       "id": 10,
       "name": "Pandabois",
       "logo": "Pandabois_logo_resized.png"
@@ -41,24 +36,19 @@
       "logo": "44b9f8e9-15cf-4b5c-a055-08d8c46e1444_128_128.jpg"
     },
     {
-      "id": 20,
-      "name": "oCtai esports",
-      "logo": "oCtai_esports.png"
-    },
-    {
       "id": 21,
-      "name": "ÞÓR Akureyri",
+      "name": "Þór Akureyri",
       "logo": "thor-akureyri-vector-logo.png"
-    },
-    {
-      "id": 22,
-      "name": "Keflavík",
-      "logo": "375keflrgb.png"
     },
     {
       "id": 30,
       "name": "Mania",
       "logo": "Mania.png"
+    },
+    {
+      "id": 31,
+      "name": "354 eSports",
+      "logo": "354v2.png"
     },
     {
       "id": 46,
@@ -67,8 +57,8 @@
     },
     {
       "id": 68,
-      "name": "354 Esports",
-      "logo": "354-logo3.png"
+      "name": "354 Academy",
+      "logo": "354-academy.png"
     },
     {
       "id": 69,
@@ -81,19 +71,9 @@
       "logo": "RLIS-Toornament-logo.png"
     },
     {
-      "id": 74,
-      "name": "Þór Old Boys",
-      "logo": "Þór.png"
-    },
-    {
       "id": 75,
-      "name": "RAFÍK",
+      "name": "Rafík",
       "logo": "RAFIK_logo_resized.png"
-    },
-    {
-      "id": 76,
-      "name": "WannaBees",
-      "logo": "wannabee.png"
     },
     {
       "id": 77,
@@ -104,21 +84,6 @@
       "id": 78,
       "name": "Þór White",
       "logo": "thor-akureyri-vector-logo.png"
-    },
-    {
-      "id": 79,
-      "name": "Fork",
-      "logo": "fork.png"
-    },
-    {
-      "id": 80,
-      "name": "Cereal",
-      "logo": "RLIS-Toornament-logo.png"
-    },
-    {
-      "id": 81,
-      "name": "Zuezie",
-      "logo": "RLIS-Toornament-logo.png"
     },
     {
       "id": 82,
@@ -134,6 +99,11 @@
       "id": 84,
       "name": "1nfinity esports",
       "logo": "infinity.png"
+    },
+    {
+      "id": 85,
+      "name": " ",
+      "logo": "undefined.png"
     }
   ]
 }
