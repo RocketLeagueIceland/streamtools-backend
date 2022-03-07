@@ -3,7 +3,7 @@
     {
       "id": 1,
       "name": "KR",
-      "logo": "KR png.png"
+      "logo": "top/TopReworked/KR.png"
     },
     {
       "id": 10,
@@ -13,7 +13,7 @@
     {
       "id": 11,
       "name": "Somnio",
-      "logo": "Somnio_logo_new_resized.png"
+      "logo": "top/TopReworked/Somnio.png"
     },
     {
       "id": 13,
@@ -23,7 +23,7 @@
     {
       "id": 16,
       "name": "Midnight Bulls",
-      "logo": "MB_resized.png"
+      "logo": "top/TopReworked/MidnightBulls.png"
     },
     {
       "id": 18,
@@ -38,7 +38,7 @@
     {
       "id": 21,
       "name": "Þór Akureyri",
-      "logo": "thor-akureyri-vector-logo.png"
+      "logo": "top/TopReworked/ÞórAkureyri.png"
     },
     {
       "id": 30,
@@ -48,12 +48,12 @@
     {
       "id": 31,
       "name": "354 eSports",
-      "logo": "354v2.png"
+      "logo": "top/TopReworked/354eSports.png"
     },
     {
       "id": 46,
       "name": "LAVA esports",
-      "logo": "Lava_logo_transparent.png"
+      "logo": "top/TopReworked/LAVAesports.png"
     },
     {
       "id": 68,
@@ -63,7 +63,7 @@
     {
       "id": 69,
       "name": "Breaking Sad",
-      "logo": "Breaking_SAD.png"
+      "logo": "top/TopReworked/BreakingSad.png"
     },
     {
       "id": 72,
@@ -73,7 +73,7 @@
     {
       "id": 75,
       "name": "Rafík",
-      "logo": "RAFIK_logo_resized.png"
+      "logo": "top/TopReworked/Rafík.png"
     },
     {
       "id": 77,
