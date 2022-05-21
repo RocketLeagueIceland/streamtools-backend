@@ -1,3 +1,5 @@
+
+const TwitchPoll = require('./twitchPoll.js');
 const express = require('express')
 const fs = require('fs');
 const cors = require('cors');
@@ -23,6 +25,8 @@ const storage = multer.diskStorage({
     cb(null, file.originalname)
   }
 });
+
+const twitchPoll = new TwitchPoll(1, '#KR', 11, '#SOM')
 
 const upload = multer({ storage: storage });
 
@@ -100,7 +104,6 @@ app.get('/current-game', (req, res) => {
   if (!currentGame || !currentGame.teams) return res.sendStatus(500);
   return res.json(currentGame);
 });
-
 
 app.put('/current-game', (req, res) => {
   console.log(req.body)
@@ -653,6 +656,29 @@ app.put('/tv-before-game', (req, res) => {
   return res.sendStatus(200);
 });
 
+app.put('/cretate-new-poll', (req, res) => {
+  console.log(req.body)
+  let pollInfo = req.body;
+  if (!pollInfo || !pollInfo.team1hash || !pollInfo.team2hash || !pollInfo.team1Id || !pollInfo.team2Id) return res.sendStatus(501);
+  twitchPoll.createNewPoll(pollInfo.team1Id, pollInfo.team1hash, pollInfo.team2Id, pollInfo.team2hash)
+  return res.sendStatus(200);
+});
+
+app.get('/get-poll-statistics', (req, res) => {
+  console.log(twitchPoll.statistics)
+  return res.json(twitchPoll.getStatistics());
+});
+
+app.put('/start-poll', (req, res) => {
+  twitchPoll.startPoll()
+  console.log(twitchPoll.team1hash)
+  return res.sendStatus(200);
+});
+
+app.put('/stop-poll', (req, res) => {
+  twitchPoll.stopPoll()
+  return res.sendStatus(200);
+});
 
 // Start the Express server
 app.listen(3002, () => console.log('Server running on port 3002!'))
