@@ -639,7 +639,6 @@ app.get('/tv-before-game', (req, res) => {
   return res.json(currentGame);
 });
 
-
 app.put('/tv-before-game', (req, res) => {
   console.log(req.body)
   let currentGame = req.body;
@@ -656,7 +655,7 @@ app.put('/tv-before-game', (req, res) => {
   return res.sendStatus(200);
 });
 
-app.put('/cretate-new-poll', (req, res) => {
+app.put('/create-new-poll', (req, res) => {
   console.log(req.body)
   let pollInfo = req.body;
   if (!pollInfo || !pollInfo.team1hash || !pollInfo.team2hash || !pollInfo.team1Id || !pollInfo.team2Id) return res.sendStatus(501);
@@ -666,7 +665,19 @@ app.put('/cretate-new-poll', (req, res) => {
 
 app.get('/get-poll-statistics', (req, res) => {
   console.log(twitchPoll.statistics)
-  return res.json(twitchPoll.getStatistics());
+  stats = twitchPoll.getStatistics()
+  if(!stats) return res.sendStatus(404)
+
+  rawdata = fs.readFileSync(allTeamsData);
+  let allTeams = JSON.parse(rawdata).teams;
+  let team1 = allTeams.find(x => x.id === stats.team1Id);
+  let team2 = allTeams.find(x => x.id === stats.team2Id);
+  stats.team1Name = team1.name
+  stats.team1Logo = team1.logo
+  stats.team2Name = team2.name
+  stats.team2Logo = team2.logo
+
+  return res.json(stats);
 });
 
 app.put('/start-poll', (req, res) => {

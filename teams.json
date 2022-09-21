@@ -3,107 +3,127 @@
     {
       "id": 1,
       "name": "KR",
+      "acro": "KR",
       "logo": "top/TopReworked/KR.png"
     },
     {
       "id": 10,
       "name": "Pandabois",
+      "acro": "PB",
       "logo": "Pandabois_logo_resized.png"
     },
     {
       "id": 11,
       "name": "Somnio",
+      "acro": "SOM",
       "logo": "top/TopReworked/Somnio.png"
     },
     {
       "id": 13,
       "name": "High-Voltage Bangers",
+      "acro": "HVB",
       "logo": "HighVoltageBangers.png"
     },
     {
       "id": 16,
       "name": "Midnight Bulls",
+      "acro": "MB",
       "logo": "top/TopReworked/MidnightBulls.png"
     },
     {
       "id": 18,
       "name": "Bíddaðeins",
+      "acro": "BA",
       "logo": "Bíddaðeins.png"
     },
     {
       "id": 19,
       "name": "RON",
+      "acro": "RON",
       "logo": "44b9f8e9-15cf-4b5c-a055-08d8c46e1444_128_128.jpg"
     },
     {
       "id": 21,
       "name": "Þór Akureyri",
+      "acro": "ÞÓR",
       "logo": "top/TopReworked/ÞórAkureyri.png"
     },
     {
       "id": 30,
       "name": "Mania",
+      "acro": "MAN",
       "logo": "Mania.png"
     },
     {
       "id": 31,
       "name": "354 eSports",
+      "acro": "354",
       "logo": "top/TopReworked/354eSports.png"
     },
     {
       "id": 46,
       "name": "LAVA esports",
+      "acro": "LAVA",
       "logo": "top/TopReworked/LAVAesports.png"
     },
     {
       "id": 68,
       "name": "354 Academy",
+      "acro": "354",
       "logo": "354-academy.png"
     },
     {
       "id": 69,
       "name": "Breaking Sad",
+      "acro": "BS",
       "logo": "top/TopReworked/BreakingSad.png"
     },
     {
       "id": 72,
       "name": "bluelaGOONS",
+      "acro": "BG",
       "logo": "RLIS-Toornament-logo.png"
     },
     {
       "id": 75,
       "name": "Rafík",
+      "acro": "RAF",
       "logo": "top/TopReworked/Rafík.png"
-    },
-    {
-      "id": 77,
-      "name": "Rusty",
-      "logo": "Rusty.png"
-    },
-    {
-      "id": 78,
-      "name": "Þór White",
-      "logo": "thor-akureyri-vector-logo.png"
     },
     {
       "id": 82,
       "name": "Svörum strax",
+      "acro": "SS",
       "logo": "svörum_strax.png"
     },
     {
       "id": 83,
       "name": "Certified Lover Boys",
+      "acro": "CLB",
       "logo": "RLIS-Toornament-logo.png"
     },
     {
       "id": 84,
       "name": "1nfinity esports",
+      "acro": "1NF",
       "logo": "infinity.png"
     },
     {
       "id": 85,
       "name": " ",
       "logo": "undefined.png"
+    },
+    {
+      "id": 86,
+      "name": "FV Esports",
+      "acro": "FV",
+      "logo": "FV_logo.png"
+    },
+    {
+      "id":98,
+      "name": "Breiðablik",
+      "acro": "BB",
+      "logo": "RLIS-Toornament-logo.png"
     }
   ]
 }
