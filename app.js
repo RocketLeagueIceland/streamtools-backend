@@ -410,7 +410,7 @@ app.get('/toornament-current-standing', async (req, res) => {
     let allTeams = JSON.parse(rawdata).teams;
 
     //scrape toornament site for info.
-    const { data } = await axios.get('https://play.toornament.com/en_GB/tournaments/5396958141712015360/stages/5396992519904862208/groups/5396992520609505297/');
+    const { data } = await axios.get('https://play.toornament.com/en_GB/tournaments/6005815484662964224/stages/6019944245391966208/groups/6044355496923930624/');
     // Load HTML we fetched in the previous line
     const $ = cheerio.load(data);
 
@@ -439,8 +439,10 @@ app.get('/toornament-current-standing', async (req, res) => {
       toornamentStandingsArray.push({ name, played, won, lost, gameswon, gameslost, plusminus, points })
     });
     //connect info with correct teams in current standings
+    console.log(toornamentStandingsArray)
     for (i = 0; i < toornamentStandingsArray.length; i++) {
       let team = allTeams.find(x => x.name === toornamentStandingsArray[i].name)
+      console.log(toornamentStandingsArray[i].name)
       console.log(toornamentStandingsArray[i])
       console.log(team)
       toornamentStandingsArray[i].id = team.id

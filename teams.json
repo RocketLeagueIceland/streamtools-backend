@@ -44,7 +44,7 @@
     },
     {
       "id": 21,
-      "name": "Þór Akureyri",
+      "name": "Þór",
       "acro": "ÞÓR",
       "logo": "top/TopReworked/ÞórAkureyri.png"
     },
@@ -62,7 +62,7 @@
     },
     {
       "id": 46,
-      "name": "LAVA esports",
+      "name": "LAVA Esports",
       "acro": "LAVA",
       "logo": "top/TopReworked/LAVAesports.png"
     },
@@ -80,9 +80,9 @@
     },
     {
       "id": 72,
-      "name": "bluelaGOONS",
+      "name": "BluelaGOONS",
       "acro": "BG",
-      "logo": "RLIS-Toornament-logo.png"
+      "logo": "blgn.png"
     },
     {
       "id": 75,
@@ -123,7 +123,13 @@
       "id":98,
       "name": "Breiðablik",
       "acro": "BB",
-      "logo": "RLIS-Toornament-logo.png"
+      "logo": "breidablik.png"
+    },
+    {
+      "id":99,
+      "name": "Pushin P.",
+      "acro": "PP",
+      "logo": "pushinp.png"
     }
   ]
 }
