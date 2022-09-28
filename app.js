@@ -26,7 +26,7 @@ const storage = multer.diskStorage({
   }
 });
 
-const twitchPoll = new TwitchPoll(1, '#KR', 11, '#SOM')
+const twitchPoll = new TwitchPoll(46, 'LAVA', 98 ,'BB')
 
 const upload = multer({ storage: storage });
 
@@ -314,9 +314,11 @@ app.post('/create-team', upload.single('file'), (req, res) => {
   let newId = allTeams.teams[allTeams.teams.length - 1].id + 1
   let fileName = req.file.originalname
   let teamName = req.body.teamName
+  let acro = req.body.acro
   let team = {
     id: newId,
     name: teamName,
+    acro: acro,
     logo: fileName
   };
   allTeams.teams.push(team)
@@ -666,7 +668,6 @@ app.put('/create-new-poll', (req, res) => {
 });
 
 app.get('/get-poll-statistics', (req, res) => {
-  console.log(twitchPoll.statistics)
   stats = twitchPoll.getStatistics()
   if(!stats) return res.sendStatus(404)
 
@@ -676,20 +677,41 @@ app.get('/get-poll-statistics', (req, res) => {
   let team2 = allTeams.find(x => x.id === stats.team2Id);
   stats.team1Name = team1.name
   stats.team1Logo = team1.logo
+  stats.team1hash = team1.acro
   stats.team2Name = team2.name
   stats.team2Logo = team2.logo
+  stats.team2hash = team2.acro
 
   return res.json(stats);
 });
 
 app.put('/start-poll', (req, res) => {
   twitchPoll.startPoll()
-  console.log(twitchPoll.team1hash)
   return res.sendStatus(200);
 });
 
 app.put('/stop-poll', (req, res) => {
   twitchPoll.stopPoll()
+  return res.sendStatus(200);
+});
+
+app.put('/show-poll', (req, res) => {
+  twitchPoll.showPoll()
+  return res.sendStatus(200);
+});
+
+app.put('/hide-poll', (req, res) => {
+  twitchPoll.hidePoll()
+  return res.sendStatus(200);
+});
+
+app.put('/show-poll-statistics', (req, res) => {
+  twitchPoll.showStatistics()
+  return res.sendStatus(200);
+});
+
+app.put('/hide-poll-statistics', (req, res) => {
+  twitchPoll.hideStatistics()
   return res.sendStatus(200);
 });
 

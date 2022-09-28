@@ -4,6 +4,7 @@ const fs = require('fs');
 
 class TwitchPoll {
   constructor(team1Id, team1hash, team2Id, team2hash) {
+
     this.team1Id = team1Id;
     this.team1hash = team1hash;
     this.team2Id = team2Id;
@@ -25,15 +26,27 @@ class TwitchPoll {
   }
 
   getStatistics() {
-    console.log(this.isStarted)
     if (!this.isStarted && !this.isCreated) {
-      return;
+      return {
+        isShowing: this.isShowing,
+        isShowingStatistics: this.isShowingStatistics,
+
+        team1Id: this.team1Id,
+        team1hash: this.team1hash,
+        team1Total: 0,
+        team2Id: this.team2Id,
+        team2hash: this.team2hash,
+        team2Total: 0
+      }
     }
     const team1Stat = Object.values(this.statistics.hash1).reduce((a, b) => a + b, 0);
     const team2Stat = Object.values(this.statistics.hash2).reduce((a, b) => a + b, 0);
 
     if (team1Stat == 0 && team2Stat == 0)
       return {
+        isShowing: this.isShowing,
+        isShowingStatistics: this.isShowingStatistics,
+
         team1Id: this.team1Id,
         team1hash: this.team1hash,
         team1Total: 0,
@@ -43,6 +56,8 @@ class TwitchPoll {
       }
 
     let results = {
+      isShowing: this.isShowing,
+      isShowingStatistics: this.isShowingStatistics,  
       team1Id: this.team1Id,
       team1hash: this.team1hash,
       team1Total: team1Stat / (team1Stat + team2Stat),
@@ -54,6 +69,7 @@ class TwitchPoll {
   }
 
   createNewPoll(team1Id, team1hash, team2Id, team2hash) {
+    this.isShowingStatistics = false;
     this.team1Id = team1Id;
     this.team1hash = team1hash;
     this.team2Id = team2Id;
@@ -93,15 +109,31 @@ class TwitchPoll {
     this.client.disconnect()
     this.isStarted = false;
     let ts = new Date();
-    fs.writeFile('old_games/newest.json', JSON.stringify(this.statistics), (err) => {
+    fs.writeFile('twitch_polls/newest.json', JSON.stringify(this.statistics), (err) => {
       // throws an error, you could also catch it here
       if (err) throw err;
     });
-    let filename = 'old_games/' + ts.toISOString().split('.')[0].replace(/:/g, '') + '.json';
+    let filename = 'twitch_polls/' + ts.toISOString().split('.')[0].replace(/:/g, '') + '.json';
     fs.writeFile(filename, JSON.stringify(this.statistics), (err) => {
       // throws an error, you could also catch it here
       if (err) throw err;
     });
+  }
+
+    showPoll() {
+    this.isShowing = true;
+  }
+
+  hidePoll() {
+    this.isShowing = false;
+  }
+
+  showStatistics() {
+    this.isShowingStatistics = true
+  }
+
+  hideStatistics() {
+    this.isShowingStatistics = false
   }
 }
 
