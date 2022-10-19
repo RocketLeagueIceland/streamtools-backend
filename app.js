@@ -195,111 +195,231 @@ app.post('/teams', (req, res) => {
   return res.sendStatus(200);
 });
 
-app.get('/scoreboard', (req, res) => {
+// app.get('/scoreboard', (req, res) => {
+//   // let rawdata = fs.readFileSync(scoreboardData);
+//   // let scoreboard = JSON.parse(rawdata);
+//   // if (!scoreboard) return res.sendStatus(500);
+
+//   // let accumulatedScoreboard = [
+//   //   {
+//   //     id: '',
+//   //     name: '',
+//   //     assists: 0,
+//   //     demos: 0,
+//   //     goals: 0,
+//   //     saves: 0,
+//   //     shots: 0,
+//   //     touches: 0,
+//   //     cartouches: 0,
+//   //     score: 0,
+//   //   }, {
+//   //     id: '',
+//   //     name: '',
+//   //     assists: 0,
+//   //     demos: 0,
+//   //     goals: 0,
+//   //     saves: 0,
+//   //     shots: 0,
+//   //     touches: 0,
+//   //     cartouches: 0,
+//   //     score: 0,
+//   //   }, {
+//   //     id: '',
+//   //     name: '',
+//   //     assists: 0,
+//   //     demos: 0,
+//   //     goals: 0,
+//   //     saves: 0,
+//   //     shots: 0,
+//   //     touches: 0,
+//   //     cartouches: 0,
+//   //     score: 0,
+//   //   }, {
+//   //     id: '',
+//   //     name: '',
+//   //     assists: 0,
+//   //     demos: 0,
+//   //     goals: 0,
+//   //     saves: 0,
+//   //     shots: 0,
+//   //     touches: 0,
+//   //     cartouches: 0,
+//   //     score: 0,
+//   //   }, {
+//   //     id: '',
+//   //     name: '',
+//   //     assists: 0,
+//   //     demos: 0,
+//   //     goals: 0,
+//   //     saves: 0,
+//   //     shots: 0,
+//   //     touches: 0,
+//   //     cartouches: 0,
+//   //     score: 0,
+//   //   }, {
+//   //     id: '',
+//   //     name: '',
+//   //     assists: 0,
+//   //     demos: 0,
+//   //     goals: 0,
+//   //     saves: 0,
+//   //     shots: 0,
+//   //     touches: 0,
+//   //     cartouches: 0,
+//   //     score: 0,
+//   //   }];
+
+//   // if (scoreboard.scoreboard.length == 0) return res.json({ scoreboard: accumulatedScoreboard });
+
+//   // for (const el of scoreboard.scoreboard) {
+//   //   for (let i = 0; i < 6; i++) {
+//   //     accumulatedScoreboard[i].id = el[i].id
+//   //     accumulatedScoreboard[i].name = el[i].name
+//   //     accumulatedScoreboard[i].assists += el[i].assists
+//   //     accumulatedScoreboard[i].demos += el[i].demos
+//   //     accumulatedScoreboard[i].goals += el[i].goals
+//   //     accumulatedScoreboard[i].saves += el[i].saves
+//   //     accumulatedScoreboard[i].shots += el[i].shots
+//   //     accumulatedScoreboard[i].touches += el[i].touches
+//   //     accumulatedScoreboard[i].cartouches += el[i].cartouches
+//   //     accumulatedScoreboard[i].score += el[i].score
+//   //   }
+//   // }
+
+//   // return res.json({ scoreboard: accumulatedScoreboard });
+// });
+
+app.get('/scoreboard2', (req, res) => {
   let rawdata = fs.readFileSync(scoreboardData);
   let scoreboard = JSON.parse(rawdata);
   if (!scoreboard) return res.sendStatus(500);
 
-  let accumulatedScoreboard = [
-    {
-      id: '',
-      name: '',
-      assists: 0,
-      demos: 0,
-      goals: 0,
-      saves: 0,
-      shots: 0,
-      touches: 0,
-      cartouches: 0,
-      score: 0,
-    }, {
-      id: '',
-      name: '',
-      assists: 0,
-      demos: 0,
-      goals: 0,
-      saves: 0,
-      shots: 0,
-      touches: 0,
-      cartouches: 0,
-      score: 0,
-    }, {
-      id: '',
-      name: '',
-      assists: 0,
-      demos: 0,
-      goals: 0,
-      saves: 0,
-      shots: 0,
-      touches: 0,
-      cartouches: 0,
-      score: 0,
-    }, {
-      id: '',
-      name: '',
-      assists: 0,
-      demos: 0,
-      goals: 0,
-      saves: 0,
-      shots: 0,
-      touches: 0,
-      cartouches: 0,
-      score: 0,
-    }, {
-      id: '',
-      name: '',
-      assists: 0,
-      demos: 0,
-      goals: 0,
-      saves: 0,
-      shots: 0,
-      touches: 0,
-      cartouches: 0,
-      score: 0,
-    }, {
-      id: '',
-      name: '',
-      assists: 0,
-      demos: 0,
-      goals: 0,
-      saves: 0,
-      shots: 0,
-      touches: 0,
-      cartouches: 0,
-      score: 0,
-    }];
+  let scoreboardTemp = {
+    blueTeamImageUrl: 'breidablik.png',
+    redTeamImageUrl: 'top/TopReworked/ÞórAkureyri.png',
+    blueScore: 3,
+    redScore: 2,
+    bluePossession: 250,
+    redPossession: 180,
 
-  if (scoreboard.scoreboard.length == 0) return res.json({ scoreboard: accumulatedScoreboard });
-
-  for (const el of scoreboard.scoreboard) {
-    for (let i = 0; i < 6; i++) {
-      accumulatedScoreboard[i].id = el[i].id
-      accumulatedScoreboard[i].name = el[i].name
-      accumulatedScoreboard[i].assists += el[i].assists
-      accumulatedScoreboard[i].demos += el[i].demos
-      accumulatedScoreboard[i].goals += el[i].goals
-      accumulatedScoreboard[i].saves += el[i].saves
-      accumulatedScoreboard[i].shots += el[i].shots
-      accumulatedScoreboard[i].touches += el[i].touches
-      accumulatedScoreboard[i].cartouches += el[i].cartouches
-      accumulatedScoreboard[i].score += el[i].score
-    }
+    players: [
+      {
+        name: 'pepsicola.coca',
+        goals: 0,
+        assists: 2,
+        saves: 1,
+        shots: 3,
+        demos: 3,
+        totalBoost: 2136
+      }, {
+        name: 'emilvald',
+        goals: 2,
+        assists: 1,
+        saves: 3,
+        shots: 5,
+        demos: 1,
+        totalBoost: 2650
+      }, {
+        name: 'paxole',
+        goals: 1,
+        assists: 0,
+        saves: 1,
+        shots: 2,
+        demos: 1,
+        totalBoost: 2230
+      }, {
+        name: 'hemmigumm',
+        goals: 0,
+        assists: 0,
+        saves: 3,
+        shots: 3,
+        demos: 3,
+        totalBoost: 2205
+      }, {
+        name: 'ousic',
+        goals: 1,
+        assists: 1,
+        saves: 2,
+        shots: 2,
+        demos: 4,
+        totalBoost: 2430
+      }, {
+        name: 'steb',
+        goals: 1,
+        assists: 0,
+        saves: 2,
+        shots: 3,
+        demos: 3,
+        totalBoost: 2320
+      }
+    ]
   }
 
-  return res.json({ scoreboard: accumulatedScoreboard });
+  return res.json(scoreboard);
 });
 
 // adds a game to current scoreboard
 app.put('/scoreboard', (req, res) => {
-  let gameInformation = req.body;
-  let rawdata = fs.readFileSync(scoreboardData);
-  let scoreboard = JSON.parse(rawdata);
-  if (!scoreboard) return res.sendStatus(505);
-  scoreboard.scoreboard.push(gameInformation);
-  fs.writeFile(scoreboardData, JSON.stringify(scoreboard), (err) => {
+  let players = req.body;
+
+  let ts = new Date();
+  console.log(ts.toISOString().split('.')[0].replace(/:/g, ''))
+  console.log('put scoreboard request came in')
+
+  let rawdata = fs.readFileSync(allTeamsData);
+  let allTeams = JSON.parse(rawdata).teams;
+  
+  ts = new Date();
+  console.log(ts.toISOString().split('.')[0].replace(/:/g, ''))
+  console.log('all teams fetched')
+
+  rawdata = fs.readFileSync(currentGameData);
+  let currentGame = JSON.parse(rawdata);
+
+  ts = new Date();
+  console.log(ts.toISOString().split('.')[0].replace(/:/g, ''))
+  console.log('current game data fetched')
+  
+  const blueId = currentGame.teams[0].id
+  const redId = currentGame.teams[1].id
+  const blueTeam = allTeams.find(x => x.id === blueId)
+  const redTeam = allTeams.find(x => x.id === redId)
+  const blueScore = players[0].goals + players[1].goals + players[2].goals
+  const redScore = players[3].goals + players[4].goals + players[5].goals
+  const bluePossession = players[0].touches + players[1].touches + players[2].touches
+  const redPossession = players[3].touches + players[4].touches + players[5].touches
+  
+  ts = new Date();
+  console.log(ts.toISOString().split('.')[0].replace(/:/g, ''))
+  console.log('calculated stuff')
+
+  let sc = {
+    blueTeamImageUrl: blueTeam.logo,
+    redTeamImageUrl: redTeam.logo,
+    blueScore: blueScore,
+    redScore: redScore,
+    bluePossession: bluePossession,
+    redPossession: redPossession,
+    
+    players: players
+  }
+
+  ts = new Date();
+  console.log(ts.toISOString().split('.')[0].replace(/:/g, ''))
+  console.log('object created, writing to file')
+  
+  fs.writeFile(scoreboardData, JSON.stringify(sc), (err) => {
     // throws an error, you could also catch it here
     if (err) throw err;
+    
+    // success case, the file was saved
+    console.log('current scoreboard updated');
   });
+
+  ts = new Date();
+  console.log(ts.toISOString().split('.')[0].replace(/:/g, ''))
+  console.log('writing to file done')
+
   return res.sendStatus(200);
 });
 
