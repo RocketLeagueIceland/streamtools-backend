@@ -121,6 +121,72 @@ app.put('/current-game', (req, res) => {
   return res.sendStatus(200);
 });
 
+app.put('/team-one-increase-wins', (req, res) => {
+  let rawdata = fs.readFileSync(currentGameData);
+  let currentGame = JSON.parse(rawdata);
+  if (!currentGame || !currentGame.teams) return res.sendStatus(500);
+
+  if (currentGame.gameNr > currentGame.bestOf) return res.sendStatus(200);
+  currentGame.teams[0].gamesWon += 1
+  currentGame.gameNr += 1
+
+  fs.writeFile(currentGameData, JSON.stringify(currentGame), (err) => {
+    // throws an error, you could also catch it here
+    if (err) throw err;
+  });
+  return res.sendStatus(200);
+});
+
+app.put('/team-two-increase-wins', (req, res) => {
+  let rawdata = fs.readFileSync(currentGameData);
+  let currentGame = JSON.parse(rawdata);
+  if (!currentGame || !currentGame.teams) return res.sendStatus(500);
+
+  if (currentGame.gameNr > currentGame.bestOf) return res.sendStatus(200);
+  currentGame.teams[1].gamesWon += 1
+  currentGame.gameNr += 1
+
+  fs.writeFile(currentGameData, JSON.stringify(currentGame), (err) => {
+    // throws an error, you could also catch it here
+    if (err) throw err;
+  });
+  return res.sendStatus(200);
+});
+
+app.put('/team-one-decrease-wins', (req, res) => {
+  let rawdata = fs.readFileSync(currentGameData);
+  let currentGame = JSON.parse(rawdata);
+  if (!currentGame || !currentGame.teams) return res.sendStatus(500);
+
+  if (currentGame.teams[0].gamesWon === 0) return res.sendStatus(200);
+  currentGame.teams[0].gamesWon -= 1
+  currentGame.gameNr -= 1
+
+  fs.writeFile(currentGameData, JSON.stringify(currentGame), (err) => {
+    // throws an error, you could also catch it here
+    if (err) throw err;
+  });
+  return res.sendStatus(200);
+});
+
+app.put('/team-two-decrease-wins', (req, res) => {
+  let rawdata = fs.readFileSync(currentGameData);
+  let currentGame = JSON.parse(rawdata);
+  if (!currentGame || !currentGame.teams) return res.sendStatus(500);
+
+  if (currentGame.teams[1].gamesWon === 0) return res.sendStatus(200);
+  currentGame.teams[1].gamesWon -= 1
+  currentGame.gameNr -= 1
+
+  fs.writeFile(currentGameData, JSON.stringify(currentGame), (err) => {
+    // throws an error, you could also catch it here
+    if (err) throw err;
+  });
+  return res.sendStatus(200);
+});
+
+
+
 app.post('/swap-current-teams', (req, res) => {
   let rawdata = fs.readFileSync(currentGameData);
   let currentTeams = JSON.parse(rawdata);
