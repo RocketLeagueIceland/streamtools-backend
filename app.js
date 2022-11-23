@@ -39,6 +39,9 @@ const scoreboardData = 'scoreboard.json';
 const weekNumberData = 'weekNumber.json';
 const gamesOnStreamData = 'gamesOnStream.json';
 const playoffsData = 'playoffs.json';
+
+// the order of the array: WB1.1, WB1.2, ..., WBFinals, LB1.1, LB1.2, LB2.2, LBFinals, GrandFinals.
+const doubleElimData = 'doubleElim.json'; 
 const tvBeforeGameData = 'tvBeforeGame.json';
 const tvAfterGameData = 'tvAfterGame.json';
 
@@ -805,6 +808,40 @@ app.put('/playoffs', (req, res) => {
   console.log(req.body)
   let playoffs = req.body;
   fs.writeFile(playoffsData, JSON.stringify(playoffs), (err) => {
+    // throws an error, you could also catch it here
+    if (err) throw err;
+
+    // success case, the file was saved
+    console.log('current game updated');
+  });
+  return res.sendStatus(200);
+});
+
+app.get('/double-elim', (req, res) => {
+  let rawdata = fs.readFileSync(doubleElimData);
+  let doubleElim = JSON.parse(rawdata);
+  rawdata = fs.readFileSync(allTeamsData);
+  let allTeams = JSON.parse(rawdata).teams;
+  
+  for(let i=0; doubleElim.length>i; i++){
+    if(doubleElim[i]){
+      let Team1 = doubleElim[i].Team1Id ? allTeams.find(x => x.id === doubleElim[i].Team1Id) : null;
+      doubleElim[i].Team1name = Team1.name
+      doubleElim[i].Team1logo = Team1.logo
+      let Team2 = doubleElim[i].Team2Id ? allTeams.find(x => x.id === doubleElim[i].Team2Id) : null;
+      doubleElim[i].Team2name = Team2.name
+      doubleElim[i].Team2logo = Team2.logo
+    }
+  }
+  
+  if (!doubleElim) return res.sendStatus(500);
+  return res.json(doubleElim);
+});
+
+app.put('/double-elim', (req, res) => {
+  console.log(req.body)
+  let doubleElim = req.body;
+  fs.writeFile(doubleElimData, JSON.stringify(doubleElim), (err) => {
     // throws an error, you could also catch it here
     if (err) throw err;
 
