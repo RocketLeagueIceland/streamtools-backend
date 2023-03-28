@@ -26,7 +26,7 @@ const storage = multer.diskStorage({
   }
 });
 
-const twitchPoll = new TwitchPoll(46, 'LAVA', 98 ,'BB')
+const twitchPoll = new TwitchPoll(46, 'LAVA', 98, 'BB')
 
 const upload = multer({ storage: storage });
 
@@ -41,7 +41,7 @@ const gamesOnStreamData = 'gamesOnStream.json';
 const playoffsData = 'playoffs.json';
 
 // the order of the array: WB1.1, WB1.2, ..., WBFinals, LB1.1, LB1.2, LB2.2, LBFinals, GrandFinals.
-const doubleElimData = 'doubleElim.json'; 
+const doubleElimData = 'doubleElim.json';
 const tvBeforeGameData = 'tvBeforeGame.json';
 const tvAfterGameData = 'tvAfterGame.json';
 
@@ -109,8 +109,9 @@ app.get('/current-game', (req, res) => {
 });
 
 app.put('/current-game', (req, res) => {
-  console.log(req.body)
+  console.log('put current-game', req.body)
   let currentGame = req.body;
+  currentGame.lastUpdated = Date.now()
   if (!currentGame || !currentGame.bestOf || currentGame.bestOf <= 0) return res.sendStatus(501);
   if (!currentGame || !currentGame.gameNr || currentGame.gameNr <= 0) return res.sendStatus(502);
   if (!currentGame || !currentGame.teams || currentGame.teams.length <= 1) return res.sendStatus(503);
@@ -129,9 +130,10 @@ app.put('/team-one-increase-wins', (req, res) => {
   let currentGame = JSON.parse(rawdata);
   if (!currentGame || !currentGame.teams) return res.sendStatus(500);
 
-  if (currentGame.gameNr > currentGame.bestOf) return res.sendStatus(200);
+  if (currentGame.gameNr > currentGame.bestOf || currentGame.teams[0].gamesWon === (currentGame.bestOf+1)/2 ) return res.sendStatus(200);
   currentGame.teams[0].gamesWon += 1
   currentGame.gameNr += 1
+  currentGame.lastUpdated = Date.now()
 
   fs.writeFile(currentGameData, JSON.stringify(currentGame), (err) => {
     // throws an error, you could also catch it here
@@ -145,9 +147,10 @@ app.put('/team-two-increase-wins', (req, res) => {
   let currentGame = JSON.parse(rawdata);
   if (!currentGame || !currentGame.teams) return res.sendStatus(500);
 
-  if (currentGame.gameNr > currentGame.bestOf) return res.sendStatus(200);
+  if (currentGame.gameNr > currentGame.bestOf || currentGame.teams[1].gamesWon === (currentGame.bestOf+1)/2 ) return res.sendStatus(200);
   currentGame.teams[1].gamesWon += 1
   currentGame.gameNr += 1
+  currentGame.lastUpdated = Date.now()
 
   fs.writeFile(currentGameData, JSON.stringify(currentGame), (err) => {
     // throws an error, you could also catch it here
@@ -164,6 +167,7 @@ app.put('/team-one-decrease-wins', (req, res) => {
   if (currentGame.teams[0].gamesWon === 0) return res.sendStatus(200);
   currentGame.teams[0].gamesWon -= 1
   currentGame.gameNr -= 1
+  currentGame.lastUpdated = Date.now()
 
   fs.writeFile(currentGameData, JSON.stringify(currentGame), (err) => {
     // throws an error, you could also catch it here
@@ -180,6 +184,7 @@ app.put('/team-two-decrease-wins', (req, res) => {
   if (currentGame.teams[1].gamesWon === 0) return res.sendStatus(200);
   currentGame.teams[1].gamesWon -= 1
   currentGame.gameNr -= 1
+  currentGame.lastUpdated = Date.now()
 
   fs.writeFile(currentGameData, JSON.stringify(currentGame), (err) => {
     // throws an error, you could also catch it here
@@ -437,7 +442,7 @@ app.put('/scoreboard', (req, res) => {
 
   let rawdata = fs.readFileSync(allTeamsData);
   let allTeams = JSON.parse(rawdata).teams;
-  
+
   ts = new Date();
   console.log(ts.toISOString().split('.')[0].replace(/:/g, ''))
   console.log('all teams fetched')
@@ -448,7 +453,7 @@ app.put('/scoreboard', (req, res) => {
   ts = new Date();
   console.log(ts.toISOString().split('.')[0].replace(/:/g, ''))
   console.log('current game data fetched')
-  
+
   const blueId = currentGame.teams[0].id
   const redId = currentGame.teams[1].id
   const blueTeam = allTeams.find(x => x.id === blueId)
@@ -457,7 +462,7 @@ app.put('/scoreboard', (req, res) => {
   const redScore = players[3].goals + players[4].goals + players[5].goals
   const bluePossession = players[0].touches + players[1].touches + players[2].touches
   const redPossession = players[3].touches + players[4].touches + players[5].touches
-  
+
   ts = new Date();
   console.log(ts.toISOString().split('.')[0].replace(/:/g, ''))
   console.log('calculated stuff')
@@ -469,18 +474,18 @@ app.put('/scoreboard', (req, res) => {
     redScore: redScore,
     bluePossession: bluePossession,
     redPossession: redPossession,
-    
+
     players: players
   }
 
   ts = new Date();
   console.log(ts.toISOString().split('.')[0].replace(/:/g, ''))
   console.log('object created, writing to file')
-  
+
   fs.writeFile(scoreboardData, JSON.stringify(sc), (err) => {
     // throws an error, you could also catch it here
     if (err) throw err;
-    
+
     // success case, the file was saved
     console.log('current scoreboard updated');
   });
@@ -601,7 +606,7 @@ app.get('/toornament-current-standing', async (req, res) => {
     let allTeams = JSON.parse(rawdata).teams;
 
     //scrape toornament site for info.
-    const { data } = await axios.get('https://play.toornament.com/en_GB/tournaments/6005815484662964224/stages/6019944245391966208/groups/6044355496923930624/');
+    const { data } = await axios.get('https://play.toornament.com/en_GB/tournaments/6441392792945721344/stages/6472425512940109824/groups/6482478112381247488/');
     // Load HTML we fetched in the previous line
     const $ = cheerio.load(data);
 
@@ -624,7 +629,7 @@ app.get('/toornament-current-standing', async (req, res) => {
       let gameslost = parseInt($(el).children('div:nth-child(10)').text().trim(), 10)
       let plusminus = parseInt($(el).children('div:nth-child(11)').text().trim(), 10)
       let points = parseInt($(el).children('div:nth-child(12)').text().trim(), 10)
-      if(!points){
+      if (!points) {
         points = 0;
       }
       toornamentStandingsArray.push({ name, played, won, lost, gameswon, gameslost, plusminus, points })
@@ -733,67 +738,67 @@ app.get('/playoffs', (req, res) => {
   rawdata = fs.readFileSync(allTeamsData);
   let allTeams = JSON.parse(rawdata).teams;
 
-  if(playoffs.m11Team1Id){
+  if (playoffs.m11Team1Id) {
     let m11Team1 = playoffs.m11Team1Id ? allTeams.find(x => x.id === playoffs.m11Team1Id) : null;
     playoffs.m11Team1name = m11Team1.name
     playoffs.m11Team1logo = m11Team1.logo
   }
-  if(playoffs.m11Team2Id){
+  if (playoffs.m11Team2Id) {
     let m11Team2 = playoffs.m11Team2Id ? allTeams.find(x => x.id === playoffs.m11Team2Id) : null;
     playoffs.m11Team2name = m11Team2.name
     playoffs.m11Team2logo = m11Team2.logo
   }
-  
-  if(playoffs.m12Team1Id){
+
+  if (playoffs.m12Team1Id) {
     let m12Team1 = playoffs.m12Team1Id ? allTeams.find(x => x.id === playoffs.m12Team1Id) : null;
     playoffs.m12Team1name = m12Team1.name
     playoffs.m12Team1logo = m12Team1.logo
   }
-  if(playoffs.m12Team2Id){
+  if (playoffs.m12Team2Id) {
     let m12Team2 = playoffs.m12Team2Id ? allTeams.find(x => x.id === playoffs.m12Team2Id) : null;
     playoffs.m12Team2name = m12Team2.name
     playoffs.m12Team2logo = m12Team2.logo
   }
-  
-  if(playoffs.semi1Team1Id){
+
+  if (playoffs.semi1Team1Id) {
     let semi1Team1 = playoffs.semi1Team1Id ? allTeams.find(x => x.id === playoffs.semi1Team1Id) : null;
     playoffs.semi1Team1name = semi1Team1.name
     playoffs.semi1Team1logo = semi1Team1.logo
   }
-  if(playoffs.semi1Team2Id){
+  if (playoffs.semi1Team2Id) {
     let semi1Team2 = playoffs.semi1Team2Id ? allTeams.find(x => x.id === playoffs.semi1Team2Id) : null;
     playoffs.semi1Team2name = semi1Team2.name
     playoffs.semi1Team2logo = semi1Team2.logo
   }
-  
-  if(playoffs.semi2Team1Id){
+
+  if (playoffs.semi2Team1Id) {
     let semi2Team1 = playoffs.semi2Team1Id ? allTeams.find(x => x.id === playoffs.semi2Team1Id) : null;
     playoffs.semi2Team1name = semi2Team1.name
     playoffs.semi2Team1logo = semi2Team1.logo
   }
-  if(playoffs.semi2Team2Id){
+  if (playoffs.semi2Team2Id) {
     let semi2Team2 = playoffs.semi2Team2Id ? allTeams.find(x => x.id === playoffs.semi2Team2Id) : null;
     playoffs.semi2Team2name = semi2Team2.name
     playoffs.semi2Team2logo = semi2Team2.logo
   }
-  
-  if(playoffs.thirdTeam1Id){
+
+  if (playoffs.thirdTeam1Id) {
     let thirdTeam1 = playoffs.thirdTeam1Id ? allTeams.find(x => x.id === playoffs.thirdTeam1Id) : null;
     playoffs.thirdTeam1name = thirdTeam1.name
     playoffs.thirdTeam1logo = thirdTeam1.logo
   }
-  if(playoffs.thirdTeam2Id){
+  if (playoffs.thirdTeam2Id) {
     let thirdTeam2 = playoffs.thirdTeam2Id ? allTeams.find(x => x.id === playoffs.thirdTeam2Id) : null;
     playoffs.thirdTeam2name = thirdTeam2.name
     playoffs.thirdTeam2logo = thirdTeam2.logo
   }
-  
-  if(playoffs.finalTeam1Id){
+
+  if (playoffs.finalTeam1Id) {
     let finalTeam1 = playoffs.finalTeam1Id ? allTeams.find(x => x.id === playoffs.finalTeam1Id) : null;
     playoffs.finalTeam1name = finalTeam1.name
     playoffs.finalTeam1logo = finalTeam1.logo
   }
-  if(playoffs.finalTeam2Id){
+  if (playoffs.finalTeam2Id) {
     let finalTeam2 = playoffs.finalTeam2Id ? allTeams.find(x => x.id === playoffs.finalTeam2Id) : null;
     playoffs.finalTeam2name = finalTeam2.name
     playoffs.finalTeam2logo = finalTeam2.logo
@@ -822,9 +827,9 @@ app.get('/double-elim', (req, res) => {
   let doubleElim = JSON.parse(rawdata);
   rawdata = fs.readFileSync(allTeamsData);
   let allTeams = JSON.parse(rawdata).teams;
-  
-  for(let i=0; doubleElim.length>i; i++){
-    if(doubleElim[i]){
+
+  for (let i = 0; doubleElim.length > i; i++) {
+    if (doubleElim[i]) {
       let Team1 = doubleElim[i].Team1Id ? allTeams.find(x => x.id === doubleElim[i].Team1Id) : null;
       doubleElim[i].Team1name = Team1.name
       doubleElim[i].Team1logo = Team1.logo
@@ -833,7 +838,7 @@ app.get('/double-elim', (req, res) => {
       doubleElim[i].Team2logo = Team2.logo
     }
   }
-  
+
   if (!doubleElim) return res.sendStatus(500);
   return res.json(doubleElim);
 });
@@ -892,7 +897,7 @@ app.put('/create-new-poll', (req, res) => {
 
 app.get('/get-poll-statistics', (req, res) => {
   stats = twitchPoll.getStatistics()
-  if(!stats) return res.sendStatus(404)
+  if (!stats) return res.sendStatus(404)
 
   rawdata = fs.readFileSync(allTeamsData);
   let allTeams = JSON.parse(rawdata).teams;

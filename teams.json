@@ -1,1 +1,183 @@
-{"teams":[{"id":1,"name":"KR","acro":"KR","logo":"top/TopReworked/KR.png"},{"id":10,"name":"Pandabois","acro":"PB","logo":"Pandabois_logo_resized.png"},{"id":11,"name":"Somnio","acro":"SOM","logo":"top/TopReworked/Somnio.png"},{"id":13,"name":"High-Voltage Bangers","acro":"HVB","logo":"HighVoltageBangers.png"},{"id":16,"name":"Midnight Bulls","acro":"MB","logo":"top/TopReworked/MidnightBulls.png"},{"id":18,"name":"Bíddaðeins","acro":"BA","logo":"Bíddaðeins.png"},{"id":19,"name":"RON","acro":"RON","logo":"RON_allmode.png"},{"id":21,"name":"Þór","acro":"ÞÓR","logo":"top/TopReworked/ÞórAkureyri.png"},{"id":30,"name":"Mania","acro":"MAN","logo":"Mania.png"},{"id":31,"name":"354 eSports","acro":"354","logo":"top/TopReworked/354eSports.png"},{"id":46,"name":"LAVA Esports","acro":"LAVA","logo":"top/TopReworked/LAVAesports.png"},{"id":68,"name":"354 Academy","acro":"354","logo":"354-academy.png"},{"id":69,"name":"Breaking Sad","acro":"BS","logo":"top/TopReworked/BreakingSad.png"},{"id":72,"name":"BluelaGOONS","acro":"BLGN","logo":"blgn.png"},{"id":75,"name":"Rafík","acro":"RAF","logo":"top/TopReworked/Rafík.png"},{"id":82,"name":"Svörum strax","acro":"SS","logo":"svörum_strax.png"},{"id":83,"name":"Certified Lover Boys","acro":"CLB","logo":"RLIS-Toornament-logo.png"},{"id":84,"name":"1nfinity esports","acro":"1NF","logo":"infinity.png"},{"id":85,"name":" ","logo":"undefined.png"},{"id":86,"name":"FV Esports","acro":"FV","logo":"FV_logo.png"},{"id":98,"name":"Breiðablik","acro":"BB","logo":"breidablik.png"},{"id":99,"name":"Pushin P.","acro":"PP","logo":"pushinp.png"},{"id":100,"name":"OMON","acro":"omon","logo":"OMON.png"},{"id":101,"name":"Gaulverjar","acro":"GAUL","logo":"Gaulverjar.png"}]}
+{
+  "teams": [
+    {
+      "id": 1,
+      "name": "KR",
+      "acro": "KR",
+      "logo": "top/TopReworked/KR.png"
+    },
+    {
+      "id": 10,
+      "name": "Pandabois",
+      "acro": "PB",
+      "logo": "Pandabois_logo_resized.png"
+    },
+    {
+      "id": 11,
+      "name": "Somnio",
+      "acro": "SOM",
+      "logo": "top/TopReworked/Somnio.png"
+    },
+    {
+      "id": 13,
+      "name": "High-Voltage Bangers",
+      "acro": "HVB",
+      "logo": "HighVoltageBangers.png"
+    },
+    {
+      "id": 16,
+      "name": "Midnight Bulls",
+      "acro": "MB",
+      "logo": "top/TopReworked/MidnightBulls.png"
+    },
+    {
+      "id": 18,
+      "name": "Bíddaðeins",
+      "acro": "BA",
+      "logo": "Bíddaðeins.png"
+    },
+    {
+      "id": 19,
+      "name": "RON",
+      "acro": "RON",
+      "logo": "RON_allmode.png"
+    },
+    {
+      "id": 21,
+      "name": "Þór",
+      "acro": "ÞÓR",
+      "logo": "top/TopReworked/Þór.png"
+    },
+    {
+      "id": 30,
+      "name": "Mania",
+      "acro": "MAN",
+      "logo": "Mania.png"
+    },
+    {
+      "id": 31,
+      "name": "354 Esports",
+      "acro": "354",
+      "logo": "top/TopReworked/354.png"
+    },
+    {
+      "id": 46,
+      "name": "LAVA Esports",
+      "acro": "LAVA",
+      "logo": "top/TopReworked/Lava.png"
+    },
+    {
+      "id": 68,
+      "name": "354 Academy",
+      "acro": "354",
+      "logo": "354-academy.png"
+    },
+    {
+      "id": 69,
+      "name": "Breaking Sad",
+      "acro": "BS",
+      "logo": "top/TopReworked/BreakingSad.png"
+    },
+    {
+      "id": 72,
+      "name": "BluelaGOONS",
+      "acro": "BLGN",
+      "logo": "blgn.png"
+    },
+    {
+      "id": 75,
+      "name": "Rafík",
+      "acro": "RAF",
+      "logo": "top/TopReworked/Rafík.png"
+    },
+    {
+      "id": 82,
+      "name": "Svörum strax",
+      "acro": "SS",
+      "logo": "svörum_strax.png"
+    },
+    {
+      "id": 83,
+      "name": "Certified Lover Boys",
+      "acro": "CLB",
+      "logo": "RLIS-Toornament-logo.png"
+    },
+    {
+      "id": 84,
+      "name": "1nfinity esports",
+      "acro": "1NF",
+      "logo": "infinity.png"
+    },
+    {
+      "id": 85,
+      "name": " ",
+      "logo": "undefined.png"
+    },
+    {
+      "id": 86,
+      "name": "FV Esports",
+      "acro": "FV",
+      "logo": "FV_logo.png"
+    },
+    {
+      "id": 98,
+      "name": "Breiðablik",
+      "acro": "BB",
+      "logo": "breidablik.png"
+    },
+    {
+      "id": 99,
+      "name": "Pushin P",
+      "acro": "PP",
+      "logo": "pushinp.png"
+    },
+    {
+      "id": 100,
+      "name": "OMON",
+      "acro": "omon",
+      "logo": "OMON.png"
+    },
+    {
+      "id": 101,
+      "name": "Gaulverjar",
+      "acro": "GAUL",
+      "logo": "Gaulverjar.png"
+    },
+    {
+      "id": 102,
+      "name": "Suðurtak",
+      "acro": "STK",
+      "logo": "Suðurtak.png"
+    },
+    {
+      "id": 103,
+      "name": "Tækniskólinn",
+      "acro": "",
+      "logo": "Tskoli_allmode.png"
+    },
+    {
+      "id": 104,
+      "name": "FÁ",
+      "acro": "",
+      "logo": "FA_allmode.png"
+    },
+    {
+      "id": 105,
+      "name": "FVA",
+      "acro": "",
+      "logo": "FVA_allmode.png"
+    },
+    {
+      "id": 106,
+      "name": "MTR",
+      "acro": "",
+      "logo": "mtr_esports.png"
+    },
+    {
+      "id": 107,
+      "name": "Víkingur Ólafsvík",
+      "acro": "VÓ",
+      "logo": "top/TopReworked/VÓ.png"
+    }
+  ]
+}
