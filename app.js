@@ -125,6 +125,20 @@ app.put('/current-game', (req, res) => {
   return res.sendStatus(200);
 });
 
+app.get('/team-one-wins', (req, res) => {
+  let rawdata = fs.readFileSync(currentGameData);
+  let currentGame = JSON.parse(rawdata);
+  if (!currentGame || !currentGame.teams || !currentGame.teams[0]) return res.sendStatus(500);
+  return res.json(currentGame.teams[0].gamesWon);
+});
+
+app.get('/team-two-wins', (req, res) => {
+  let rawdata = fs.readFileSync(currentGameData);
+  let currentGame = JSON.parse(rawdata);
+  if (!currentGame || !currentGame.teams || !currentGame.teams[1]) return res.sendStatus(500);
+  return res.json(currentGame.teams[1].gamesWon);
+});
+
 app.put('/team-one-increase-wins', (req, res) => {
   let rawdata = fs.readFileSync(currentGameData);
   let currentGame = JSON.parse(rawdata);
