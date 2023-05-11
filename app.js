@@ -108,6 +108,26 @@ app.get('/current-game', (req, res) => {
   return res.json(currentGame);
 });
 
+app.get('/team-one-logo', (req, res) => {
+  let rawdata = fs.readFileSync(currentGameData);
+  let currentGame = JSON.parse(rawdata);
+  rawdata = fs.readFileSync(allTeamsData);
+  let allTeams = JSON.parse(rawdata).teams;
+  let team1 = allTeams.find(x => x.id === currentGame.teams[0].id);
+  if (!currentGame || !currentGame.teams) return res.sendStatus(500);
+  return res.json(team1.logo);
+});
+
+app.get('/team-two-logo', (req, res) => {
+  let rawdata = fs.readFileSync(currentGameData);
+  let currentGame = JSON.parse(rawdata);
+  rawdata = fs.readFileSync(allTeamsData);
+  let allTeams = JSON.parse(rawdata).teams;
+  let team2 = allTeams.find(x => x.id === currentGame.teams[1].id);
+  if (!currentGame || !currentGame.teams) return res.sendStatus(500);
+  return res.json(team2.logo);
+});
+
 app.put('/current-game', (req, res) => {
   console.log('put current-game', req.body)
   let currentGame = req.body;
@@ -448,18 +468,21 @@ app.get('/scoreboard2', (req, res) => {
 
 // adds a game to current scoreboard
 app.put('/scoreboard', (req, res) => {
-  let players = req.body;
+  let gameinfo = req.body;
+  let players = gameinfo.players;
+  const fieldDomination = gameinfo.fieldDomination;
+  console.log(gameinfo);
 
   let ts = new Date();
-  console.log(ts.toISOString().split('.')[0].replace(/:/g, ''))
-  console.log('put scoreboard request came in')
+  console.log(ts.toISOString().split('.')[0].replace(/:/g, ''));
+  console.log('put scoreboard request came in');
 
   let rawdata = fs.readFileSync(allTeamsData);
   let allTeams = JSON.parse(rawdata).teams;
 
   ts = new Date();
-  console.log(ts.toISOString().split('.')[0].replace(/:/g, ''))
-  console.log('all teams fetched')
+  console.log(ts.toISOString().split('.')[0].replace(/:/g, ''));
+  console.log('all teams fetched');
 
   rawdata = fs.readFileSync(currentGameData);
   let currentGame = JSON.parse(rawdata);
@@ -488,6 +511,7 @@ app.put('/scoreboard', (req, res) => {
     redScore: redScore,
     bluePossession: bluePossession,
     redPossession: redPossession,
+    fieldDomination: fieldDomination,
 
     players: players
   }
