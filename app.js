@@ -6,8 +6,6 @@ const cors = require('cors');
 const multer = require('multer');
 const axios = require("axios");
 const cheerio = require("cheerio");
-const pretty = require("pretty");
-const { formatWithOptions } = require('util');
 
 // Create Express app
 const app = express()
@@ -288,100 +286,6 @@ app.post('/teams', (req, res) => {
   // });
   return res.sendStatus(200);
 });
-
-// app.get('/scoreboard', (req, res) => {
-//   // let rawdata = fs.readFileSync(scoreboardData);
-//   // let scoreboard = JSON.parse(rawdata);
-//   // if (!scoreboard) return res.sendStatus(500);
-
-//   // let accumulatedScoreboard = [
-//   //   {
-//   //     id: '',
-//   //     name: '',
-//   //     assists: 0,
-//   //     demos: 0,
-//   //     goals: 0,
-//   //     saves: 0,
-//   //     shots: 0,
-//   //     touches: 0,
-//   //     cartouches: 0,
-//   //     score: 0,
-//   //   }, {
-//   //     id: '',
-//   //     name: '',
-//   //     assists: 0,
-//   //     demos: 0,
-//   //     goals: 0,
-//   //     saves: 0,
-//   //     shots: 0,
-//   //     touches: 0,
-//   //     cartouches: 0,
-//   //     score: 0,
-//   //   }, {
-//   //     id: '',
-//   //     name: '',
-//   //     assists: 0,
-//   //     demos: 0,
-//   //     goals: 0,
-//   //     saves: 0,
-//   //     shots: 0,
-//   //     touches: 0,
-//   //     cartouches: 0,
-//   //     score: 0,
-//   //   }, {
-//   //     id: '',
-//   //     name: '',
-//   //     assists: 0,
-//   //     demos: 0,
-//   //     goals: 0,
-//   //     saves: 0,
-//   //     shots: 0,
-//   //     touches: 0,
-//   //     cartouches: 0,
-//   //     score: 0,
-//   //   }, {
-//   //     id: '',
-//   //     name: '',
-//   //     assists: 0,
-//   //     demos: 0,
-//   //     goals: 0,
-//   //     saves: 0,
-//   //     shots: 0,
-//   //     touches: 0,
-//   //     cartouches: 0,
-//   //     score: 0,
-//   //   }, {
-//   //     id: '',
-//   //     name: '',
-//   //     assists: 0,
-//   //     demos: 0,
-//   //     goals: 0,
-//   //     saves: 0,
-//   //     shots: 0,
-//   //     touches: 0,
-//   //     cartouches: 0,
-//   //     score: 0,
-//   //   }];
-
-//   // if (scoreboard.scoreboard.length == 0) return res.json({ scoreboard: accumulatedScoreboard });
-
-//   // for (const el of scoreboard.scoreboard) {
-//   //   for (let i = 0; i < 6; i++) {
-//   //     accumulatedScoreboard[i].id = el[i].id
-//   //     accumulatedScoreboard[i].name = el[i].name
-//   //     accumulatedScoreboard[i].assists += el[i].assists
-//   //     accumulatedScoreboard[i].demos += el[i].demos
-//   //     accumulatedScoreboard[i].goals += el[i].goals
-//   //     accumulatedScoreboard[i].saves += el[i].saves
-//   //     accumulatedScoreboard[i].shots += el[i].shots
-//   //     accumulatedScoreboard[i].touches += el[i].touches
-//   //     accumulatedScoreboard[i].cartouches += el[i].cartouches
-//   //     accumulatedScoreboard[i].score += el[i].score
-//   //   }
-//   // }
-
-//   // return res.json({ scoreboard: accumulatedScoreboard });
-// });
 
 app.get('/scoreboard2', (req, res) => {
   let rawdata = fs.readFileSync(scoreboardData);
