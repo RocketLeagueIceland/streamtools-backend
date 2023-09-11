@@ -644,7 +644,7 @@ app.get('/toornament-current-standing', async (req, res) => {
     let allTeams = JSON.parse(rawdata).teams;
 
     //scrape toornament site for info.
-    const { data } = await axios.get('https://play.toornament.com/en_GB/tournaments/6441392792945721344/stages/6472425512940109824/groups/6482478112381247488/');
+    const { data } = await axios.get('https://play.toornament.com/en_US/tournaments/7015421821342982144/stages/7026587216347217920/groups/7067667760943693824/');
     // Load HTML we fetched in the previous line
     const $ = cheerio.load(data);
 
