@@ -143,6 +143,20 @@ app.put('/current-game', (req, res) => {
   return res.sendStatus(200);
 });
 
+app.get('/team-one-wins', (req, res) => {
+  let rawdata = fs.readFileSync(currentGameData);
+  let currentGame = JSON.parse(rawdata);
+  if (!currentGame || !currentGame.teams || !currentGame.teams[0]) return res.sendStatus(500);
+  return res.json(currentGame.teams[0].gamesWon);
+});
+
+app.get('/team-two-wins', (req, res) => {
+  let rawdata = fs.readFileSync(currentGameData);
+  let currentGame = JSON.parse(rawdata);
+  if (!currentGame || !currentGame.teams || !currentGame.teams[1]) return res.sendStatus(500);
+  return res.json(currentGame.teams[1].gamesWon);
+});
+
 app.put('/team-one-increase-wins', (req, res) => {
   let rawdata = fs.readFileSync(currentGameData);
   let currentGame = JSON.parse(rawdata);
@@ -534,7 +548,7 @@ app.get('/toornament-current-standing', async (req, res) => {
     let allTeams = JSON.parse(rawdata).teams;
 
     //scrape toornament site for info.
-    const { data } = await axios.get('https://play.toornament.com/en_GB/tournaments/6441392792945721344/stages/6472425512940109824/groups/6482478112381247488/');
+    const { data } = await axios.get('https://play.toornament.com/en_US/tournaments/7015421821342982144/stages/7026587216347217920/groups/7067667760943693824/');
     // Load HTML we fetched in the previous line
     const $ = cheerio.load(data);
 

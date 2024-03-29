@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"bestOf":5,"gameNr":4,"overlayShowing":false,"boostOverlayShowing":false,"targetOverlayShowing":true,"hasCustomTimeAndScore":true,"playerShowing":true,"teams":[{"id":99,"gamesWon":1},{"id":102,"gamesWon":2}],"lastUpdated":1683987825175}
+=======
+{"bestOf":7,"gameNr":1,"overlayShowing":false,"boostOverlayShowing":true,"targetOverlayShowing":true,"hasCustomTimeAndScore":true,"playerShowing":true,"teams":[{"id":21,"gamesWon":0},{"id":109,"gamesWon":0}],"lastUpdated":1708618818277}
+>>>>>>> e0959f5aa081955c61ac7a3db75b37e208808449
