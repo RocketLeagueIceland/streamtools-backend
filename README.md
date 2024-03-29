@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Streamtools - Backend (Express)
 
 Used in production for RLÍS streams (Rocket League Ísland). This is a backend to support the Frontend with Data and logic.
@@ -47,6 +46,3 @@ Perhaps use something else than json for storing data. Also use Next.js and stre
 ## Contributing
 
 Please provide a detailed description of what your pull request adds or removes.
-=======
-lalala
->>>>>>> e0959f5aa081955c61ac7a3db75b37e208808449
