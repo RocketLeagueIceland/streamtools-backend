@@ -56,7 +56,7 @@
         },
         {
             "id": 31,
-            "name": "354 Esports",
+            "name": "354esports",
             "acro": "354",
             "logo": "top/TopReworked/354.png"
         },
@@ -187,7 +187,7 @@
         },
         {
             "id": 109,
-            "name": "DUSTY",
+            "name": "Dusty",
             "acro": "DY",
             "logo": "Dusty.png"
         },
@@ -202,6 +202,13 @@
             "name": "OGV",
             "acro": "OGV",
             "logo": "OGV.png"
+        },
+        {
+            "id": 112,
+            "name": "Quick",
+            "acro": "Q",
+            "logo": "quick_logo.png"
         }
+
     ]
 }

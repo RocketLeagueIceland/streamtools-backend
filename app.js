@@ -523,7 +523,7 @@ app.get('/current-standing', (req, res) => {
     currentStandings[i].logo = team.logo
   }
 
-  if (!currentStandings || currentStandings.length != 8) return res.sendStatus(500);
+  if (!currentStandings || currentStandings.length != 6) return res.sendStatus(500);
   return res.json(currentStandings);
 });
 
@@ -548,7 +548,7 @@ app.get('/toornament-current-standing', async (req, res) => {
     let allTeams = JSON.parse(rawdata).teams;
 
     //scrape toornament site for info.
-    const { data } = await axios.get('https://play.toornament.com/en_US/tournaments/7015421821342982144/stages/7026587216347217920/groups/7067667760943693824/');
+    const { data } = await axios.get('https://play.toornament.com/en_US/tournaments/7539808990509883392/stages/7539833179842469888/groups/7539833181251756045/');
     // Load HTML we fetched in the previous line
     const $ = cheerio.load(data);
 
@@ -577,7 +577,8 @@ app.get('/toornament-current-standing', async (req, res) => {
       toornamentStandingsArray.push({ name, played, won, lost, gameswon, gameslost, plusminus, points })
     });
     //connect info with correct teams in current standings
-    console.log(toornamentStandingsArray)
+    // console.log("toornamentStandingsArray")
+    // console.log(toornamentStandingsArray)
     for (i = 0; i < toornamentStandingsArray.length; i++) {
       let team = allTeams.find(x => x.name === toornamentStandingsArray[i].name)
       console.log(toornamentStandingsArray[i].name)
@@ -591,6 +592,7 @@ app.get('/toornament-current-standing', async (req, res) => {
     return res.json(toornamentStandingsArray);
   } catch (error) {
     console.log(error)
+    return res.sendStatus(500);
   }
 });
 
